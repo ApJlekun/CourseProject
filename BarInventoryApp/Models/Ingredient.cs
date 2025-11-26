@@ -1,0 +1,32 @@
+﻿namespace BarInventoryApp.Models;
+
+/// <summary>
+/// Представляет ингредиент для бара (напиток, добавка и т.д.).
+/// </summary>
+public partial class Ingredient
+{
+    /// <summary>
+    /// Уникальный идентификатор ингредиента.
+    /// </summary>
+    public int Id { get; set; }
+
+    /// <summary>
+    /// Название ингредиента.
+    /// </summary>
+    public string Name { get; set; } = null!;
+
+    /// <summary>
+    /// Количество ингредиента в наличии.
+    /// </summary>
+    public decimal Quantity { get; set; }
+
+    /// <summary>
+    /// Единица измерения (литры, граммы, штуки и т.д.).
+    /// </summary>
+    public string Unit { get; set; } = null!;
+
+    /// <summary>
+    /// Коллекция заказов, связанных с данным ингредиентом.
+    /// </summary>
+    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
+}
