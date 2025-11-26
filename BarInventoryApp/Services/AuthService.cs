@@ -9,7 +9,13 @@ namespace BarInventoryApp.Services;
 /// </summary>
 public class AuthService
 {
+    #region Поля
+
     private readonly AppDbContext _context;
+
+    #endregion
+
+    #region Конструктор
 
     /// <summary>
     /// Инициализирует новый экземпляр класса AuthService.
@@ -19,6 +25,10 @@ public class AuthService
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }
+
+    #endregion
+
+    #region Методы
 
     /// <summary>
     /// Аутентифицирует пользователя по логину и паролю.
@@ -46,4 +56,6 @@ public class AuthService
 
         return null;
     }
+
+    #endregion
 }

@@ -5,6 +5,8 @@ namespace BarInventoryApp.Constants;
 /// </summary>
 public static class ApplicationConstants
 {
+    #region Роли
+
     /// <summary>
     /// Константы ролей пользователей системы.
     /// </summary>
@@ -47,6 +49,10 @@ public static class ApplicationConstants
         public const int Admin = 3;
     }
 
+    #endregion
+
+    #region Сообщения
+
     /// <summary>
     /// Сообщения для пользователя.
     /// </summary>
@@ -69,5 +75,7 @@ public static class ApplicationConstants
         public const string UserExists = "Пользователь с таким логином уже существует.";
         public const string ExcelExportSuccess = "Файл успешно сохранён!";
     }
+
+    #endregion
 }
 

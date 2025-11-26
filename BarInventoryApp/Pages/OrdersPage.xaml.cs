@@ -11,7 +11,13 @@ namespace BarInventoryApp.Pages;
 /// </summary>
 public partial class OrdersPage : Page
 {
+    #region Поля
+
     private readonly MainViewModel _mainViewModel;
+
+    #endregion
+
+    #region Конструктор
 
     /// <summary>
     /// Инициализирует новый экземпляр класса OrdersPage.
@@ -24,6 +30,10 @@ public partial class OrdersPage : Page
         DataContext = viewModel;
         _mainViewModel = mainViewModel;
     }
+
+    #endregion
+
+    #region Обработчики событий
 
     /// <summary>
     /// Обработчик нажатия кнопки "Назад".
@@ -53,4 +63,6 @@ public partial class OrdersPage : Page
         Session.CurrentUser = null;
         _mainViewModel.NavigateTo<AuthorizationPage>();
     }
+
+    #endregion
 }

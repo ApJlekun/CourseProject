@@ -9,7 +9,13 @@ namespace BarInventoryApp.Services;
 /// </summary>
 public class IngredientService
 {
+    #region Поля
+
     private readonly AppDbContext _context;
+
+    #endregion
+
+    #region Конструктор
 
     /// <summary>
     /// Инициализирует новый экземпляр класса IngredientService.
@@ -19,6 +25,10 @@ public class IngredientService
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }
+
+    #endregion
+
+    #region Методы
 
     /// <summary>
     /// Получает все ингредиенты из базы данных.
@@ -72,4 +82,6 @@ public class IngredientService
         await _context.SaveChangesAsync();
         return true;
     }
+
+    #endregion
 }

@@ -16,6 +16,8 @@ namespace BarInventoryApp.ViewModels;
 /// </summary>
 public class OrdersViewModel : INotifyPropertyChanged
 {
+    #region Поля
+
     private readonly OrderService _orderService;
     private readonly IngredientService _ingredientService;
     private readonly UserService _userService;
@@ -23,6 +25,10 @@ public class OrdersViewModel : INotifyPropertyChanged
     private readonly MainViewModel _mainViewModel;
     private string _filter = string.Empty;
     private List<Order> _allOrders = new();
+
+    #endregion
+
+    #region Свойства
 
     /// <summary>
     /// Коллекция отфильтрованных заказов для отображения.
@@ -37,6 +43,15 @@ public class OrdersViewModel : INotifyPropertyChanged
         get => _filter;
         set { _filter = value; OnPropertyChanged(); ApplyFilter(); }
     }
+
+    /// <summary>
+    /// Выбранный заказ в списке (для привязки выделения в DataGrid).
+    /// </summary>
+    public Order? SelectedItem { get; set; }
+
+    #endregion
+
+    #region Команды
 
     /// <summary>
     /// Команда для добавления нового заказа.
@@ -57,6 +72,10 @@ public class OrdersViewModel : INotifyPropertyChanged
     /// Команда для экспорта заказов в Excel.
     /// </summary>
     public ICommand ExportCommand { get; }
+
+    #endregion
+
+    #region Конструктор
 
     /// <summary>
     /// Инициализирует новый экземпляр класса OrdersViewModel.
@@ -86,6 +105,10 @@ public class OrdersViewModel : INotifyPropertyChanged
 
         LoadOrders();
     }
+
+    #endregion
+
+    #region Методы
 
     /// <summary>
     /// Загружает все заказы из базы данных.
@@ -207,10 +230,9 @@ public class OrdersViewModel : INotifyPropertyChanged
         }
     }
 
-    /// <summary>
-    /// Выбранный заказ в списке (для привязки выделения в DataGrid).
-    /// </summary>
-    public Order? SelectedItem { get; set; }
+    #endregion
+
+    #region События
 
     /// <summary>
     /// Событие, возникающее при изменении значения свойства.
@@ -225,4 +247,6 @@ public class OrdersViewModel : INotifyPropertyChanged
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
+
+    #endregion
 }

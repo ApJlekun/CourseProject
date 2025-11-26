@@ -16,11 +16,17 @@ namespace BarInventoryApp.ViewModels;
 /// </summary>
 public class IngredientsViewModel : INotifyPropertyChanged
 {
+    #region Поля
+
     private readonly IngredientService _service;
     private readonly MainViewModel _mainViewModel;
     private readonly IServiceProvider _serviceProvider;
     private string _filter = string.Empty;
     private List<Ingredient> _allIngredients = new();
+
+    #endregion
+
+    #region Свойства
 
     /// <summary>
     /// Коллекция отфильтрованных ингредиентов для отображения.
@@ -37,6 +43,15 @@ public class IngredientsViewModel : INotifyPropertyChanged
     }
 
     /// <summary>
+    /// Выбранный ингредиент в списке (для привязки выделения в DataGrid).
+    /// </summary>
+    public Ingredient? SelectedItem { get; set; }
+
+    #endregion
+
+    #region Команды
+
+    /// <summary>
     /// Команда для добавления нового ингредиента.
     /// </summary>
     public ICommand? AddCommand { get; }
@@ -50,6 +65,10 @@ public class IngredientsViewModel : INotifyPropertyChanged
     /// Команда для удаления выбранного ингредиента.
     /// </summary>
     public ICommand? DeleteCommand { get; }
+
+    #endregion
+
+    #region Конструктор
 
     /// <summary>
     /// Инициализирует новый экземпляр класса IngredientsViewModel.
@@ -74,6 +93,10 @@ public class IngredientsViewModel : INotifyPropertyChanged
 
         LoadIngredients();
     }
+
+    #endregion
+
+    #region Методы
 
     /// <summary>
     /// Загружает все ингредиенты из базы данных.
@@ -175,10 +198,9 @@ public class IngredientsViewModel : INotifyPropertyChanged
         }
     }
 
-    /// <summary>
-    /// Выбранный ингредиент в списке (для привязки выделения в DataGrid).
-    /// </summary>
-    public Ingredient? SelectedItem { get; set; }
+    #endregion
+
+    #region События
 
     /// <summary>
     /// Событие, возникающее при изменении значения свойства.
@@ -193,4 +215,6 @@ public class IngredientsViewModel : INotifyPropertyChanged
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
+
+    #endregion
 }

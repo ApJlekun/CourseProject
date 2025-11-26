@@ -11,7 +11,13 @@ namespace BarInventoryApp.Pages;
 /// </summary>
 public partial class IngredientsPage : Page
 {
+    #region Поля
+
     private readonly MainViewModel _mainViewModel;
+
+    #endregion
+
+    #region Конструктор
 
     /// <summary>
     /// Инициализирует новый экземпляр класса IngredientsPage.
@@ -24,6 +30,10 @@ public partial class IngredientsPage : Page
         DataContext = viewModel;
         _mainViewModel = mainViewModel;
     }
+
+    #endregion
+
+    #region Обработчики событий
 
     /// <summary>
     /// Обработчик изменения текста в поле поиска.
@@ -62,4 +72,6 @@ public partial class IngredientsPage : Page
         Session.CurrentUser = null;
         _mainViewModel.NavigateTo<AuthorizationPage>();
     }
+
+    #endregion
 }

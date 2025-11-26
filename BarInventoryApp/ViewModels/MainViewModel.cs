@@ -9,8 +9,14 @@ namespace BarInventoryApp.ViewModels;
 /// </summary>
 public class MainViewModel
 {
+    #region Поля
+
     private Frame? _frame;
     private readonly IServiceProvider _serviceProvider;
+
+    #endregion
+
+    #region Конструктор
 
     /// <summary>
     /// Инициализирует новый экземпляр класса MainViewModel.
@@ -20,6 +26,10 @@ public class MainViewModel
     {
         _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
     }
+
+    #endregion
+
+    #region Методы
 
     /// <summary>
     /// Устанавливает Frame для навигации и переходит на страницу авторизации.
@@ -61,4 +71,6 @@ public class MainViewModel
 
         _frame.Content = page;
     }
+
+    #endregion
 }

@@ -9,7 +9,13 @@ namespace BarInventoryApp.Services;
 /// </summary>
 public class OrderService
 {
+    #region Поля
+
     private readonly AppDbContext _context;
+
+    #endregion
+
+    #region Конструктор
 
     /// <summary>
     /// Инициализирует новый экземпляр класса OrderService.
@@ -19,6 +25,10 @@ public class OrderService
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }
+
+    #endregion
+
+    #region Методы
 
     /// <summary>
     /// Получает все заказы с загруженными связанными данными (ингредиент и создатель с ролью).
@@ -76,4 +86,6 @@ public class OrderService
         await _context.SaveChangesAsync();
         return true;
     }
+
+    #endregion
 }

@@ -15,12 +15,18 @@ namespace BarInventoryApp.ViewModels;
 /// </summary>
 public class UsersViewModel : INotifyPropertyChanged
 {
+    #region Поля
+
     private readonly UserService _userService;
     private readonly List<Role> _roles;
     private User? _selectedUser;
     private string _login = string.Empty;
     private string _password = string.Empty;
     private int _selectedRoleId;
+
+    #endregion
+
+    #region Свойства
 
     /// <summary>
     /// Коллекция пользователей для отображения.
@@ -77,6 +83,10 @@ public class UsersViewModel : INotifyPropertyChanged
         set { _selectedRoleId = value; OnPropertyChanged(); }
     }
 
+    #endregion
+
+    #region Команды
+
     /// <summary>
     /// Команда для сохранения изменений роли выбранного пользователя.
     /// </summary>
@@ -86,6 +96,10 @@ public class UsersViewModel : INotifyPropertyChanged
     /// Команда для создания нового пользователя.
     /// </summary>
     public ICommand CreateUserCommand { get; }
+
+    #endregion
+
+    #region Конструктор
 
     /// <summary>
     /// Инициализирует новый экземпляр класса UsersViewModel.
@@ -109,6 +123,10 @@ public class UsersViewModel : INotifyPropertyChanged
 
         LoadUsers();
     }
+
+    #endregion
+
+    #region Методы
 
     /// <summary>
     /// Загружает всех пользователей из базы данных.
@@ -214,6 +232,10 @@ public class UsersViewModel : INotifyPropertyChanged
         }
     }
 
+    #endregion
+
+    #region События
+
     /// <summary>
     /// Событие, возникающее при изменении значения свойства.
     /// </summary>
@@ -227,4 +249,6 @@ public class UsersViewModel : INotifyPropertyChanged
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
+
+    #endregion
 }

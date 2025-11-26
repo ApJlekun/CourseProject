@@ -9,7 +9,13 @@ namespace BarInventoryApp.Services;
 /// </summary>
 public class UserService
 {
+    #region Поля
+
     private readonly AppDbContext _context;
+
+    #endregion
+
+    #region Конструктор
 
     /// <summary>
     /// Инициализирует новый экземпляр класса UserService.
@@ -19,6 +25,10 @@ public class UserService
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }
+
+    #endregion
+
+    #region Методы
 
     /// <summary>
     /// Получает всех пользователей с загруженными ролями.
@@ -72,4 +82,6 @@ public class UserService
         await _context.SaveChangesAsync();
         return true;
     }
+
+    #endregion
 }

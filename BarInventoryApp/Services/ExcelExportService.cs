@@ -11,12 +11,18 @@ namespace BarInventoryApp.Services;
 /// </summary>
 public class ExcelExportService
 {
+    #region Константы
+
     private const string ExcelFileFilter = "Excel files (*.xlsx)|*.xlsx";
     private const string WorksheetName = "Заказы";
     private const string DateFormat = "dd.MM.yyyy HH:mm";
     private const string FileNamePrefix = "Заказы_";
     private const string FileNameDateFormat = "yyyy-MM-dd_HH-mm";
     private const string SuccessTitle = "Успех";
+
+    #endregion
+
+    #region Методы
 
     /// <summary>
     /// Экспортирует список заказов в файл Excel.
@@ -68,4 +74,6 @@ public class ExcelExportService
                 MessageBoxImage.Information);
         }
     }
+
+    #endregion
 }

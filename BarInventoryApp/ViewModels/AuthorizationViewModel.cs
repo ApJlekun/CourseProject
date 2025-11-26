@@ -14,11 +14,17 @@ namespace BarInventoryApp.ViewModels;
 /// </summary>
 public class AuthorizationViewModel : INotifyPropertyChanged
 {
+    #region Поля
+
     private readonly AuthService _authService;
     private readonly MainViewModel _mainViewModel;
     private readonly IServiceProvider _serviceProvider;
     private string _login = string.Empty;
     private string _password = string.Empty;
+
+    #endregion
+
+    #region Свойства
 
     /// <summary>
     /// Логин пользователя.
@@ -43,6 +49,10 @@ public class AuthorizationViewModel : INotifyPropertyChanged
     /// </summary>
     public ICommand LoginCommand { get; }
 
+    #endregion
+
+    #region Конструктор
+
     /// <summary>
     /// Инициализирует новый экземпляр класса AuthorizationViewModel.
     /// </summary>
@@ -56,6 +66,10 @@ public class AuthorizationViewModel : INotifyPropertyChanged
         _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
         LoginCommand = new RelayCommand(OnLogin);
     }
+
+    #endregion
+
+    #region Методы
 
     /// <summary>
     /// Обработчик команды входа в систему.
@@ -106,6 +120,10 @@ public class AuthorizationViewModel : INotifyPropertyChanged
         }
     }
 
+    #endregion
+
+    #region События
+
     /// <summary>
     /// Событие, возникающее при изменении значения свойства.
     /// </summary>
@@ -119,4 +137,6 @@ public class AuthorizationViewModel : INotifyPropertyChanged
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
+
+    #endregion
 }
