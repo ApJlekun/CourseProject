@@ -1,6 +1,5 @@
 ﻿using BarInventoryApp.Pages;
 using Microsoft.Extensions.DependencyInjection;
-using System.Windows;
 using System.Windows.Controls;
 
 namespace BarInventoryApp.ViewModels;
