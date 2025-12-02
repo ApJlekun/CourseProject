@@ -49,8 +49,6 @@ public class AuthService
             .Include(u => u.Role)
             .FirstOrDefaultAsync(u => u.Login == login);
 
-        // Внимание: В текущей реализации пароль сравнивается в открытом виде.
-        // В продакшене следует использовать хеширование паролей (например, BCrypt).
         if (user != null && user.PasswordHash == password)
             return user;
 
