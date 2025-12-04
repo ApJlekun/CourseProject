@@ -44,15 +44,19 @@
                 </StackPanel>
                 
                 <StackPanel Orientation="Horizontal">
-                    <Button Content="+ Добавить" Command="{Binding AddCommand}" 
+                    <Button Content="+ Добавить" Command="{Binding AddCommand}"
                             Style="{StaticResource PrimaryButton}"
                             Margin="0,0,8,0" Padding="16,10"
                             Visibility="{Binding AddCommand, Converter={StaticResource NullToVisibilityConverter}}"/>
-                    <Button Content="Редактировать" Command="{Binding EditCommand}" 
+                    <Button Content="📥 Импорт" Command="{Binding ImportCommand}"
+                            Style="{StaticResource SecondaryButton}"
+                            Margin="0,0,8,0" Padding="16,10"
+                            Visibility="{Binding ImportCommand, Converter={StaticResource NullToVisibilityConverter}}"/>
+                    <Button Content="Редактировать" Command="{Binding EditCommand}"
                             Style="{StaticResource SecondaryButton}"
                             Margin="0,0,8,0" Padding="16,10"
                             Visibility="{Binding EditCommand, Converter={StaticResource NullToVisibilityConverter}}"/>
-                    <Button Content="Удалить" Command="{Binding DeleteCommand}" 
+                    <Button Content="Удалить" Command="{Binding DeleteCommand}"
                             Style="{StaticResource DangerButton}"
                             Padding="16,10"
                             Visibility="{Binding DeleteCommand, Converter={StaticResource NullToVisibilityConverter}}"/>

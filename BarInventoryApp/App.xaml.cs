@@ -50,6 +50,7 @@ namespace BarInventoryApp
                     services.AddScoped<OrderService>();
                     services.AddScoped<UserService>();
                     services.AddScoped<ExcelExportService>();
+                    services.AddScoped<ExcelImportService>();
 
                     services.AddDbContext<AppDbContext>(options =>
                         options.UseSqlServer(context.Configuration.GetConnectionString("DefaultConnection")));

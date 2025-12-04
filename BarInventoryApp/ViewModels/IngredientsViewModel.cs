@@ -21,6 +21,7 @@ public class IngredientsViewModel : INotifyPropertyChanged
     private readonly IngredientService _service;
     private readonly MainViewModel _mainViewModel;
     private readonly IServiceProvider _serviceProvider;
+    private readonly ExcelImportService _importService;
     private string _filter = string.Empty;
     private List<Ingredient> _allIngredients = new();
 
@@ -66,6 +67,11 @@ public class IngredientsViewModel : INotifyPropertyChanged
     /// </summary>
     public ICommand? DeleteCommand { get; }
 
+    /// <summary>
+    /// Команда для импорта ингредиентов из Excel.
+    /// </summary>
+    public ICommand? ImportCommand { get; }
+
     #endregion
 
     #region Конструктор
@@ -76,11 +82,13 @@ public class IngredientsViewModel : INotifyPropertyChanged
     /// <param name="service">Сервис для работы с ингредиентами.</param>
     /// <param name="mainViewModel">Главная ViewModel для навигации.</param>
     /// <param name="serviceProvider">Провайдер сервисов.</param>
-    public IngredientsViewModel(IngredientService service, MainViewModel mainViewModel, IServiceProvider serviceProvider)
+    /// <param name="importService">Сервис для импорта из Excel.</param>
+    public IngredientsViewModel(IngredientService service, MainViewModel mainViewModel, IServiceProvider serviceProvider, ExcelImportService importService)
     {
         _service = service ?? throw new ArgumentNullException(nameof(service));
         _mainViewModel = mainViewModel ?? throw new ArgumentNullException(nameof(mainViewModel));
         _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
+        _importService = importService ?? throw new ArgumentNullException(nameof(importService));
 
         // Команды доступны только администраторам
         var role = Session.CurrentUser?.Role.Name;
@@ -89,6 +97,7 @@ public class IngredientsViewModel : INotifyPropertyChanged
             AddCommand = new RelayCommand(OnAdd);
             EditCommand = new RelayCommand(OnEdit);
             DeleteCommand = new RelayCommand(OnDelete);
+            ImportCommand = new RelayCommand(OnImport);
         }
 
         LoadIngredients();
@@ -195,6 +204,67 @@ public class IngredientsViewModel : INotifyPropertyChanged
                         MessageBoxImage.Error);
                 }
             }
+        }
+    }
+
+    /// <summary>
+    /// Обработчик команды импорта ингредиентов из Excel.
+    /// </summary>
+    private async void OnImport()
+    {
+        try
+        {
+            // Показываем инструкции по импорту
+            _importService.ShowImportInstructions();
+
+            // Импортируем данные из файла
+            var importedIngredients = _importService.ImportIngredients();
+            if (importedIngredients == null || importedIngredients.Count == 0)
+                return;
+
+            int addedCount = 0;
+            int updatedCount = 0;
+
+            // Обрабатываем каждый импортированный ингредиент
+            foreach (var importedIngredient in importedIngredients)
+            {
+                // Ищем существующий ингредиент с таким же названием
+                var existingIngredient = _allIngredients.FirstOrDefault(i =>
+                    i.Name.Equals(importedIngredient.Name, StringComparison.OrdinalIgnoreCase));
+
+                if (existingIngredient != null)
+                {
+                    // Обновляем существующий
+                    existingIngredient.Quantity = importedIngredient.Quantity;
+                    existingIngredient.Unit = importedIngredient.Unit;
+                    await _service.UpdateAsync(existingIngredient);
+                    updatedCount++;
+                }
+                else
+                {
+                    // Добавляем новый
+                    await _service.AddAsync(importedIngredient);
+                    addedCount++;
+                }
+            }
+
+            // Перезагружаем список
+            LoadIngredients();
+
+            // Показываем результат
+            MessageBox.Show(
+                $"Импорт завершен успешно!\nДобавлено: {addedCount}\nОбновлено: {updatedCount}",
+                "Успех",
+                MessageBoxButton.OK,
+                MessageBoxImage.Information);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(
+                $"Ошибка импорта: {ex.Message}",
+                "Ошибка",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error);
         }
     }
 
